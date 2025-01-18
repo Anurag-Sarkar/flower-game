@@ -110,6 +110,8 @@
             flowersArray.forEach((flower)=>{
                 flower.style.top = '6rem';
             })
+            score = 0
+            document.querySelector('span').innerText = score
             document.querySelector('button').textContent = 'Start Game'
             document.querySelector('button').setAttribute('onclick','startGame()')
             clearTimeout(hideTimeout)
