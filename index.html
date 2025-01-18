@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main">
+        <h1>SCORE - <span>0</span></h1>
+        <div class="container">
+            <div class="contain">
+                <div class="div">
+                    <img class="pipe" src="./Warp_Pipe_-_2D_shaded.webp" alt="">
+                    <img class='flower' src="./flower.png" alt="">
+                </div>
+                <div class="div">
+                    <img class="pipe" src="./Warp_Pipe_-_2D_shaded.webp" alt="">
+                    <img class='flower' src="./flower.png" alt="">
+                </div>
+                <div class="div">
+                    <img class="pipe" src="./Warp_Pipe_-_2D_shaded.webp" alt="">
+                    <img class='flower' src="./flower.png" alt="">
+                </div>
+            </div>
+            <div class="contain">
+                <div class="div">
+                    <img class="pipe" src="./Warp_Pipe_-_2D_shaded.webp" alt="">
+                    <img class='flower' src="./flower.png" alt="">
+                </div>
+                <div class="div">
+                    <img class="pipe" src="./Warp_Pipe_-_2D_shaded.webp" alt="">
+                    <img class='flower' src="./flower.png" alt="">
+                </div>
+                <div class="div">
+                    <img class="pipe" src="./Warp_Pipe_-_2D_shaded.webp" alt="">
+                    <img class='flower' src="./flower.png" alt="">
+                </div>
+            </div>
+            <div class="contain">
+                <div class="div">
+                    <img class="pipe" src="./Warp_Pipe_-_2D_shaded.webp" alt="">
+                    <img class='flower' src="./flower.png" alt="">
+                </div>
+                <div class="div">
+                    <img class="pipe" src="./Warp_Pipe_-_2D_shaded.webp" alt="">
+                    <img class='flower' src="./flower.png" alt="">
+                </div>
+                <div class="div">
+                    <img class="pipe" src="./Warp_Pipe_-_2D_shaded.webp" alt="">
+                    <img class='flower' src="./flower.png" alt="">
+                </div>
+            </div>
+        </div>
+        <button onclick="startGame()">Start Game</button>
+    </div>
+
+    <script>
+        let flowersArray = document.querySelectorAll('.flower');
+        let hideTimeout;
+        let showTimeout;
+        let score = 0
+        var randomNumber = Math.floor(Math.random()*9)
+        
+        flowersArray.forEach((flower)=>{
+            flower.addEventListener('click',()=>{
+                flower.style.top = '6rem';
+                newFlower()
+                scoreUpdate()
+            })
+        })
+        
+        function HideFlower(){
+            flowersArray[randomNumber].style.top = '6rem';
+            newFlower()
+        }
+        function ShowFlower(){
+            console.log(randomNumber)
+            flowersArray[randomNumber].style.top = '1.3rem';
+        }
+
+        function RandomNumber(){
+            randomNumber = Math.floor(Math.random()*9)
+        }
+
+        function startGame(){
+            document.querySelector('button').textContent = 'Stop Game'
+            document.querySelector('button').setAttribute('onclick','stopGame()')
+            RandomNumber()
+            hideTimeout = setTimeout(HideFlower,4000)
+            showTimeout = setTimeout(ShowFlower,1000)
+        }
+        function newFlower(){
+            clearTimeout(hideTimeout)
+            clearTimeout(showTimeout)
+            RandomNumber()
+            hideTimeout = setTimeout(HideFlower,4000)
+            showTimeout = setTimeout(ShowFlower,1000)
+        }
+        function scoreUpdate(){
+            score+=10
+            if(score == 100){
+                alert('You Win')
+                stopGame()
+            }
+            document.querySelector('span').innerText = score
+        }
+        function stopGame(){
+            flowersArray.forEach((flower)=>{
+                flower.style.top = '6rem';
+            })
+            document.querySelector('button').textContent = 'Start Game'
+            document.querySelector('button').setAttribute('onclick','startGame()')
+            clearTimeout(hideTimeout)
+            clearTimeout(showTimeout)
+        }
+
+</script>
+</body>
+</html>
